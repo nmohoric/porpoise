@@ -6,12 +6,14 @@ import (
 )
 
 func HandleContainers(r render.Render){
+    r.HTML(200, "containers", map[string]interface{}{"Title": "containers",})
+ }
+ func HandleContainersAPI(r render.Render){
 	endpoint        := "unix:///var/run/docker.sock"
 	client, _       := docker.NewClient(endpoint)
 
 	containers, _   := client.ListContainers(docker.ListContainersOptions{false,false,10,"",""})
-
-    r.JSON(200, containers)
+   r.JSON(200, containers)
 }
 
 func HandlePost(r render.Render){

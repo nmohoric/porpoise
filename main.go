@@ -19,6 +19,7 @@ func main(){
     })
 
     m.Get("/containers", HandleContainers)
+    m.Get("/api/containers", HandleContainersAPI)
     m.Post("/post", HandlePost)
     m.Get("/json", HandleJSON)
 
