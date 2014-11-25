@@ -2,24 +2,19 @@ package main
 
 import (
 	"github.com/fsouza/go-dockerclient"
-    "github.com/gin-gonic/gin"
+    "github.com/martini-contrib/render"
 )
 
-func HandleIndex(c *gin.Context){
-    obj := gin.H{"title": "Main website"}
-    c.HTML(200, "layout.html", obj)
-}
-
-func HandleContainers(c *gin.Context){
+func HandleContainers(r render.Render){
 	endpoint        := "unix:///var/run/docker.sock"
 	client, _       := docker.NewClient(endpoint)
 
 	containers, _   := client.ListContainers(docker.ListContainersOptions{false,false,10,"",""})
 
-    c.JSON(200, containers)
+    r.JSON(200, containers)
 }
 
-func HandlePost(c *gin.Context){
+func HandlePost(r render.Render){
 }
 
 type Result struct {
@@ -27,6 +22,6 @@ type Result struct {
     LastName  string `json:"last"`
 }
 
-func HandleJSON(c *gin.Context){
-	c.JSON(200, gin.H{"first":"tee", "last":"dub"})
+func HandleJSON(r render.Render){
+//	r.JSON(200, gin.H{"first":"tee", "last":"dub"})
 }

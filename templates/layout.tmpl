@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
-        <title>Go Web Skeleton</title>
+        <title>{{.Title}}</title>
     </head>
     <body>
         <div class="container">
@@ -17,7 +17,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Go Website Skeleton</a>
+                    <a class="navbar-brand" href="/">Docker Nav</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -32,7 +32,7 @@
                 </div>
             </nav>
 
-        {{template "body" .}}
+        {{ yield }}
 
         </div>
     </body>

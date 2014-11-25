@@ -1,21 +1,26 @@
 package main
 
 import (
-    "github.com/gin-gonic/gin"
+    "log"
+    "net/http"
+    "github.com/go-martini/martini"
+    "github.com/martini-contrib/render"
 )
 
 func main(){
-    r := gin.Default()
-    r.LoadHTMLTemplates("templates/*.html")
+    m := martini.Classic()
+    m.Use(render.Renderer(render.Options{
+        Layout: "layout",
+        IndentJSON: true,
+    }))
 
-    r.GET("/", func(c *gin.Context){
-        obj := gin.H{".Title": "Main website"}
-        c.HTML(200, "index.html", obj)
+    m.Get("/", func(r render.Render){
+        r.HTML(200, "index", map[string]interface{}{"Title": "home"})
     })
 
-    r.GET("/containers", HandleContainers)
-    r.POST("/post", HandlePost)
-    r.GET("/json", HandleJSON)
+    m.Get("/containers", HandleContainers)
+    m.Post("/post", HandlePost)
+    m.Get("/json", HandleJSON)
 
-    r.Run(":8080")
+    log.Fatal(http.ListenAndServe(":8080", m))
 }
